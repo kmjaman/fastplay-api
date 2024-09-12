@@ -23,9 +23,7 @@ class Video(Base):
     url = Column(String, unique=True, index=True)
     views = Column(Integer, default=0)
     likes = Column(Integer, default=0)
-
-
-Base.metadata.create_all(bind=engine)
+    file_path = Column(String, nullable=True)
 
 
 
@@ -39,3 +37,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
+
